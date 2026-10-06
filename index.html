@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171717">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Budget Guard</title>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PERSONAL MONEY CONTROL</p>
+        <h1>Budget Guard</h1>
+        <p id="periodLabel" class="muted">October 2026</p>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Edit budget settings">⚙</button>
+    </header>
+
+    <section class="hero card">
+      <div class="hero-row">
+        <div>
+          <span class="label">Money left</span>
+          <div class="big-money" id="remaining">₹0</div>
+        </div>
+        <div class="status" id="status">ON TRACK</div>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="stats">
+        <div><span>Starting balance</span><strong id="startingBalance">₹0</strong></div>
+        <div><span>Spent</span><strong id="spent">₹0</strong></div>
+        <div><span>Monthly limit</span><strong id="limit">₹0</strong></div>
+      </div>
+    </section>
+
+    <section class="today card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TODAY</p>
+          <h2 id="todayDate">—</h2>
+        </div>
+        <button id="addBtn" class="primary">+ Add spending</button>
+      </div>
+      <p class="muted" id="todaySpent">₹0 spent today</p>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">BREAKDOWN</p>
+          <h2>Where the money went</h2>
+        </div>
+      </div>
+      <div id="categories" class="categories"></div>
+    </section>
+
+    <section class="receipt card">
+      <div class="receipt-top">
+        <div>
+          <p class="eyebrow">RECEIPT</p>
+          <h2>Spending history</h2>
+        </div>
+        <button id="clearBtn" class="danger-outline">Clear receipt</button>
+      </div>
+      <div id="receiptList"></div>
+      <div id="emptyReceipt" class="empty">No spending recorded yet.</div>
+    </section>
+
+    <p class="footer-note">Your data stays on this device/browser.</p>
+  </main>
+
+  <dialog id="expenseDialog">
+    <form id="expenseForm" method="dialog" class="modal">
+      <div class="modal-head">
+        <div><p class="eyebrow">SPENDING</p><h2 id="expenseTitle">Add spending</h2></div>
+        <button type="button" class="close" data-close="expenseDialog">×</button>
+      </div>
+      <input type="hidden" id="expenseId">
+      <label>Date<input id="expenseDate" type="date" required></label>
+      <label>Amount (₹)<input id="expenseAmount" type="number" min="0.01" step="0.01" required></label>
+      <label>Where did it go?
+        <select id="expenseCategory" required>
+          <option>Food & snacks</option>
+          <option>Travel / transport</option>
+          <option>Recharge & subscriptions</option>
+          <option>College / study items</option>
+          <option>Shopping</option>
+          <option>Other small spends</option>
+        </select>
+      </label>
+      <label>What was it for? <input id="expenseNote" type="text" maxlength="80" placeholder="e.g. bus, snack, recharge"></label>
+      <div class="modal-actions">
+        <button type="button" class="secondary" data-close="expenseDialog">Cancel</button>
+        <button class="primary" type="submit">Save spending</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form id="settingsForm" method="dialog" class="modal">
+      <div class="modal-head">
+        <div><p class="eyebrow">SETUP</p><h2>Edit your budget</h2></div>
+        <button type="button" class="close" data-close="settingsDialog">×</button>
+      </div>
+      <p class="muted small">This is fully editable, so the app can work for anyone—not just one fixed balance.</p>
+      <label>Budget month<input id="month" type="month" required></label>
+      <label>Starting balance (₹)<input id="balance" type="number" min="0" step="0.01" required></label>
+      <label>Monthly spending limit (₹)<input id="monthlyLimit" type="number" min="0" step="0.01" required></label>
+      <div class="modal-actions">
+        <button type="button" class="secondary" data-close="settingsDialog">Cancel</button>
+        <button class="primary" type="submit">Save budget</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

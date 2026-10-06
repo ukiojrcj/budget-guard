@@ -1,0 +1,9 @@
+{
+  "name":"Budget Guard",
+  "short_name":"Budget Guard",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f4f2ee",
+  "theme_color":"#191919",
+  "icons":[]
+}
